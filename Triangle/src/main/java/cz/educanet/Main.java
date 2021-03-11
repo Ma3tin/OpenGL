@@ -11,29 +11,29 @@ public class Main {
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3);
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 3);
 
-        long window = GLFW.glfwCreateWindow(800, 600, "My first window", 0, 0);
-        if (window == 0) {
+        long okno = GLFW.glfwCreateWindow(800, 600, "My first window", 0, 0);
+        if (okno == 0) {
             GLFW.glfwTerminate();
             throw new Exception("Can't open window");
         }
-        GLFW.glfwMakeContextCurrent(window);
+        GLFW.glfwMakeContextCurrent(okno);
 
         GL.createCapabilities();
         GL33.glViewport(0, 0, 800, 600);
 
-        GLFW.glfwSetFramebufferSizeCallback(window, (win, w, h) -> {
+        GLFW.glfwSetFramebufferSizeCallback(okno, (win, w, h) -> {
             GL33.glViewport(0, 0, w, h);
         });
 
-        Game.init(window);
-        while (!GLFW.glfwWindowShouldClose(window)) {
-            if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_ESCAPE) == GLFW.GLFW_PRESS)
-                GLFW.glfwSetWindowShouldClose(window, true);
+        Game.makeUp(okno);
+        while (!GLFW.glfwWindowShouldClose(okno)) {
+            if (GLFW.glfwGetKey(okno, GLFW.GLFW_KEY_ESCAPE) == GLFW.GLFW_PRESS)
+                GLFW.glfwSetWindowShouldClose(okno, true);
             GL33.glClearColor(1f, 0f, 1f, 1f);
             GL33.glClear(GL33.GL_COLOR_BUFFER_BIT);
-            Game.render(window);
-            Game.update(window);
-            GLFW.glfwSwapBuffers(window);
+            Game.vykreslit(okno);
+            Game.again(okno);
+            GLFW.glfwSwapBuffers(okno);
             GLFW.glfwPollEvents();
         }
 
